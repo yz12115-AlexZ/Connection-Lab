@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Week_1        # <- 这里指向含有 index.html 的目录
+          path: Week_1   
 
       - name: Deploy to GitHub Pages
         id: deployment
