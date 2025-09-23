@@ -21,8 +21,6 @@ async function loadData() {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('places-container').style.display = 'block';
         document.getElementById('pagination').style.display = 'none';
-
-        // Show initial message
         showInitialMessage();
     } catch (error) {
         document.getElementById('loading').textContent = 'Error loading data: ' + error.message;
@@ -86,7 +84,6 @@ function handleStateFilter(event) {
 }
 
 function handleCityFilter(event) {
-    // Removed city filter functionality
 }
 
 function filterData() {
@@ -178,6 +175,4 @@ function nextPage() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
-
-// Initialize when page loads
 document.addEventListener('DOMContentLoaded', loadData);
