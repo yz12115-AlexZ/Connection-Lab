@@ -1,7 +1,7 @@
 name: Deploy static content to Pages
 on:
   push:
-    branches: ["main"]
+    branches: ["main"]   
   workflow_dispatch:
 
 permissions:
@@ -23,14 +23,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-   
-      - name: Create .nojekyll
-        run: echo > .nojekyll
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
 
+      - name: Create .nojekyll inside Week_3
+        run: |
+          mkdir -p Week_3
+          touch Week_3/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Week_3  
+          path: ./Week_3
 
       - name: Deploy to GitHub Pages
         id: deployment
