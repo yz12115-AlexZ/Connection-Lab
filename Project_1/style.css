@@ -1,0 +1,311 @@
+/* Import the downloaded Font  */
+@font-face {
+    font-family:'MyFont';
+    src: url('Font.ttf') format('truetype');
+    font-weight: normal;
+  font-style: normal;
+
+}
+/* Global reset Module */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Main body module styling */
+body {
+    /* use my background image */
+    background-image: url('background.jpg');
+    /* cover all the website */
+    background-size: cover;
+    /* Center the image */
+    background-position: center;
+    /* Keep background fixed during scroll */
+    background-attachment: fixed;
+    /* prevent image repetition */
+    background-repeat: no-repeat;
+    /* Dark color text  */
+    color: #333;
+    /* font  */
+    font-family: Arial, Helvetica, sans-serif;
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+}
+/* Transparent effect, without this, the text will become hard to read ，call this pseudo-elemen*/
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(248, 249, 250, 0.6);
+    z-index: -1;
+}
+
+/* Main header section */
+.header {
+    text-align: center;
+    /* Top,horizontal, bottom */
+    padding: 80px 20px 60px;
+    font-size: 28px;
+    font-weight: 400;
+    color: #333;
+    background: transparent;
+}
+/* h1 styling, explore haunted houses in USA */
+h1 {
+     font-family: 'MyFont', sans-serif;       
+    text-align: center;
+
+    
+}
+
+.header-content {
+    /* flexbox for horizontal layout */
+    display: flex;
+     /* vertically center logo */
+    align-items: center;
+    /* Horizontally center content */
+    justify-content: center;
+    /* Space between logo and title */
+    gap: 20px;
+    /* Maximum width constraint  */
+    max-width: 1200px;
+    /* Center tthe container horizontally */
+    margin: 0 auto;
+}
+/* Container for animated pumpkin  */
+.logo-container {
+    /* Fixed width */
+    width: 160px;
+    /* Fixed height */
+    height: 100px;
+    /* Flexbox for centering canvas */
+    display: flex;
+    /* Vertically center canvas */
+    align-items: center;
+    /* Horrizontally center canvas */
+    justify-content: center;
+}
+/* 　styling for h1 header context */
+.header h1 {
+    font-size: 28px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0;
+    
+}
+/* Video container syling  */
+.video-container {
+    /* Full width of parent container which is width:1200px */
+    width: 100%;
+    /* fixed height */
+    height: 320px;
+    /* Black background for video*/
+    background: #000;
+    /* Flexbox for centering video content */
+    display: flex;
+    /* Horizontally center video */
+    justify-content: center;
+    /* Vertically center video */
+    align-items: center;
+    /* Rounded corner */
+    border-radius: 8px;
+    /* Hide content extending beyond borders */
+    overflow: hidden;
+}
+/* Search section styling,*/
+.search-section {
+    /* Maximum width constraint */
+    max-width: 1200px;
+    /* Center horizontally */
+    margin: 0 auto;
+    /* Horrizontally padding and bottom spacing */
+    padding: 0 20px 30px;
+}
+/* Search contols layout */
+.search-controls {
+    /* Horizontal flexbox layout */
+    display: flex;
+     /* Space between control elements */
+    gap: 15px;
+     /* Vertically align controls */
+    align-items: center;
+    /* Prevent wrapping on larger screens */
+    flex-wrap: nowrap;
+     /* Maximum width constraint */
+    max-width: 1200px;
+        /* Center the controls container */
+    margin: 0 auto;
+}
+
+.search-box {
+    flex: 3;
+    min-width: 250px;
+}
+
+.filter-box {
+
+    flex: 1;
+    min-width: 130px;
+    
+}
+
+.controls-info {
+    font-family: 'MyFont', sans-serif;
+    color: #000000;
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #00d084;
+}
+
+.search-box input::placeholder {
+    color: #999;
+}
+
+.filter-box select {
+    width: 100%;
+    padding: 12px 15px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.filter-box select:focus {
+    outline: none;
+    border-color: #00d084;
+}
+
+.filter-box option {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box,
+    .filter-box {
+        min-width: auto;
+        flex: 1;
+    }
+}
+
+.main-container {
+     /* Flexbox for side-by-side columns */
+    display: flex;
+     /* Maximum width constraint */
+    max-width: 1200px;
+     /* Center horizontally */
+    margin: 0 auto;
+    /* Horizontal padding and bottom spacing */
+    padding: 0 20px 40px;
+      /* Space between left and right sections */
+    gap: 30px;
+      
+}
+/* Create a white card-style container,round corner,
+Use flex 1 1 0 to share space evenly,position help child elements can be positioned*/
+.left-section {
+    flex: 1 1 0;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+.left-content {
+    padding: 20px;
+}
+
+.left-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.left-subtitle {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.left-description {
+    color: #000000;
+    line-height: 1.4;
+    font-size:20px;
+    margin-bottom: 12px;
+}
+/* use flex 1 1 0 shares 
+equal horizontal space with the left section (*/
+.right-section {
+    flex: 1 1 0;
+    display: flex;
+    /* flexbox with a column direction
+     so its child elements are stacked vertically in a clean, responsive layout. */
+    flex-direction: column;
+}
+.cards-grid {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 16px;
+grid-auto-rows: 1fr;
+}
+
+.card {
+    display: flex;
+    flex-direction : column;
+    height: 100%;
+    background:#fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+
+.card-content {
+    flex:1;
+    padding: 12px;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #000000;
+    line-height: 1.3;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+
+.card-subtitle {
+    color: #000000;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
