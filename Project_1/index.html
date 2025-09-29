@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haunted Places Explorer</title>
+    <!-- P5 External Javascript for interactive and animated graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <!-- Stylesheet for layout, styling and responsive design -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Module. Includes p5.js (A pumpkin with two rounded eyes move following mouse) and main title -->
+    <div class="header">
+        <div class="header-content">
+            <!-- Interactive p5.js canvas container for animated pumpkin graphics-->
+            <div class="logo-container" id="logo-canvas"></div>
+            <!-- Main Title -->
+            <h1>Explore Haunted Houses In USA</h1>
+        </div>
+    </div>
+    <!-- Search Module. Searching box for users to search their interested Haunted Places where the website links to json-->
+    <div class="search-section">
+        <div class="search-controls">
+            <!-- The search-box for input text or key words -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search haunted locations or cities..." />
+            </div>
+            <!-- Region Dropdown filter from Json dataset -->
+            <div class="filter-box">
+                <select id="stateFilter">
+                    <option value="">All Regions</option>
+                </select>
+            </div>
+            <!-- User Guidance -->
+            <div class="controls-info">
+                <span id="Guidance"> Enter Haunted Places To Explore</span>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content Module. Two-column layout have the involvement of 5 haunted places videos, locations and information-->
+    <div class="main-container">
+        <!-- Left-section designed a bigger container to show the most featured haunted places -->
+        <div class="left-section">
+            <!-- Embedded YouTube video about The Aurora Inn -->
+            <div class="video-container">
+                <iframe width="100%" height="320" src="https://www.youtube.com/embed/cpdH-AuZ7NM"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="left-content">
+                <!-- Haunted place name Location and description -->
+                <div class="left-title">🏨 The Aurora Inn</div>
+                <div class="left-subtitle">📍 Aurora, New York</div>
+                <div class="left-description">
+                    There is a ghost named the white lady that i have experienced and heard of haunting the hotel and
+                    lobby of the Aurora Inn off route 90. Waiters and waitresses will even tell you that down on the
+                    shorefront of Cayuga Lake, there was once and old building that burned down and three people died.
+                    Two male ghosts haunt the shore and the white lady haunts the hotel, which is now being renovated
+                    into a restaurant and museum.
+                </div>
+            </div>
+        </div>
+        <!-- Right section- 4 Haunted places grid module with corresponding Youtube videos, information, titles and descriptions-->
+        <div class="right-section">
+            <!-- Card 1:🏥 Waverly Hills Sanatorium -->
+            <div class="cards-grid">
+                <div class="card">
+                    <!-- Embedded YouTube video about Waverly Hills Sanatorium,its title, location and description-->
+                    <iframe width="100%" height="155" src="https://www.youtube.com/embed/Hw-7thyvCSA"
+                        title="Lincoln High School" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="card-content">
+                        <div class="card-title">🏥 Waverly Hills Sanatorium</div>
+                        <div class="card-subtitle">📍 Louisville, Kentucky</div>
+                        <div class="card-description">Former TB hospital with reported ghost sightings</div>
+                    </div>
+                </div>
+                <!-- Card 2: Abraham Lincoln High School -->
+                <div class="card">
+                    <!--Embedded YouTube video about  🏫 Abraham Lincoln High School,its title, location and description  -->
+                    <iframe width="100%" height="155"
+                        src="https://www.youtube.com/embed/ePo2KKoGZK8?si=4ixzf1Tw4KiE9T9b" title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="card-content">
+                        <div class="card-title">🏫 Abraham Lincoln High School</div>
+                        <div class="card-subtitle">📍 San Francisco, California</div>
+                        <div class="card-description">late at night, toilet paper can be heard unraveling in the girl's
+                            bathroom by the main office.</div>
+                    </div>
+                </div>
+                <!-- Card 3: Professor Java's Coffee Sanctuary -->
+                <div class="card">
+                    <!--Embedded YouTube video about  ☕ Professor Java's Coffee Sanctuary,its title, location and description  -->
+                    <iframe width="100%" height="155" src="https://www.youtube.com/embed/hsoMD1nMmZU"
+                        title="Cursed Umbrella Factory" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="card-content">
+                        <div class="card-title">☕ Professor Java's Coffee Sanctuary</div>
+                        <div class="card-subtitle">📍 Wolf Road, Albany, New York</div>
+                        <div class="card-description">Mysterious coffee sanctuary where ghostly baristas serve
+                            supernatural beverages that reveal hidden truths to brave customers.</div>
+                    </div>
+                </div>
+                <!-- Card 4: 🚢 The Queen Mary< -->
+                <div class="card">
+                    <!--Embedded YouTube video about  🚢 The Queen Mary,its title, location and description  -->
+                    <iframe width="100%" height="155" src="https://www.youtube.com/embed/f5GhIb4M99w"
+                        title="Cursed Fabric Mill" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="card-content">
+                        <div class="card-title">🚢 The Queen Mary</div>
+                        <div class="card-subtitle">📍 Long Beach, California</div>
+                        <div class="card-description">Historic ocean liner where a male ghost haunts the engine room,
+                            the site of his death while the ship was still in service.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascript Module. Contain p5.js pumpkin graphics with mouse tracking eyes -->
+    <script>
+        // Canvas size(dimensions) for pumpkin
+        let logoCanvasWidth = 200;
+        let logoCanvasHeight = 200;
+        // p5.js setup function- initializes the function 
+        function setup() {
+            //Create canvas and attach it to the logo container container
+            let canvas = createCanvas(logoCanvasWidth, logoCanvasHeight);
+            canvas.parent('logo-canvas');
+            textAlign(CENTER, CENTER);
+            textSize(130);
+        }
+        function draw() {
+            // clean movement,keep canvas transparent
+            background(0, 0, 0, 0);
+            // The main pumpkin emoji 
+            text('🎃', logoCanvasWidth / 2, logoCanvasHeight / 2);
+            // Left eyes
+            let leftX = logoCanvasWidth * 0.37;
+            let leftY = logoCanvasHeight * 0.4;
+            // core math functuon makes the eye know where the mouse is and rotate precisely
+            let leftAngle = atan2(mouseY - leftY, mouseX - leftX);
+            // save the current drawing state
+            push();
+            //find the center of the eye
+            translate(leftX, leftY);
+            fill(255);
+            ellipse(0, 0, 30, 30);
+            // eyeball move 
+            rotate(leftAngle);
+            fill(0);
+            ellipse(8, 0, 15, 15);
+            // restore drawing state 
+            pop();
+
+            // Right eye. Functions same as left eye
+            let rightX = logoCanvasWidth * 0.63;
+            let rightY = logoCanvasHeight * 0.4;
+            let rightAngle = atan2(mouseY - rightY, mouseX - rightX);
+
+            push();
+            translate(rightX, rightY);
+            fill(255);
+            ellipse(0, 0, 30, 30);
+            rotate(rightAngle);
+            fill(0);
+            ellipse(8, 0, 15, 15);
+            pop();
+        }
+        // Search functionality Module
+        //Global variable to store haunted places data from json
+        let hauntedPlacesData = [];
+        // Initialize search functionality when dom content is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const stateFilter = document.getElementById('stateFilter');
+
+            // Load haunted places data from json to populate state filter
+            loadStatesData();
+
+            // event listener for enter key press in search input
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    redirectToSearch();
+                }
+            });
+
+            // event listener for state filter dropdown selection
+            stateFilter.addEventListener('change', function () {
+                //Only redirect if a state is selected
+                if (this.value) {
+                    redirectToSearch();
+                }
+            });
+            //Asynchronous function to load haunted places data from json
+            async function loadStatesData() {
+                try {
+                    // Fetch Json data
+                    const response = await fetch('haunted_places.json');
+                    hauntedPlacesData = await response.json();
+                    populateStateFilter();
+                } catch (error) {
+                    //log error if Json file cannot be loaded
+                    console.log('Could not load states data:', error);
+                }
+            }
+            // function to Use loaded Json data (hauntedPlaces) to populate the state dropdown
+            function populateStateFilter() {
+                const states = [...new Set(hauntedPlacesData.map(place => place.state).filter(Boolean))].sort();
+
+                states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state;
+                    option.textContent = state;
+                    stateFilter.appendChild(option);
+                });
+            }
+            //Function to redirect to search results page to index1.html
+            function redirectToSearch() {
+                const searchTerm = searchInput.value.trim();
+                const selectedState = stateFilter.value;
+                // only redirect if user has provided search criteria
+                if (searchTerm || selectedState) {
+                    // Build URL parameters for search page
+                    const params = new URLSearchParams();
+                    if (searchTerm) params.append('search', searchTerm);
+                    if (selectedState) params.append('state', selectedState);
+                    //Navigate to search result page with parameters
+                    window.location.href = `index1.html${params.toString() ? '?' + params.toString() : ''}`;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
