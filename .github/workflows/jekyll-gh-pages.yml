@@ -26,14 +26,16 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Create .nojekyll inside Week_3
+    
+      - name: Create .nojekyll inside Project_1
         run: |
-          mkdir -p Week_3
-          touch Week_3/.nojekyll
+          mkdir -p Project_1
+          touch Project_1/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./Week_3
+          path: ./Project_1
 
       - name: Deploy to GitHub Pages
         id: deployment
