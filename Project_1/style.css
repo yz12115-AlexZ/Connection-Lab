@@ -207,20 +207,6 @@ h1 {
     background: #2a2a2a;
     color: #fff;
 }
-
-@media (max-width: 768px) {
-    .search-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-box,
-    .filter-box {
-        min-width: auto;
-        flex: 1;
-    }
-}
-
 .main-container {
     /* Flexbox for side-by-side columns */
     display: flex;
@@ -321,4 +307,5 @@ equal horizontal space with the left section (*/
     color: #000000;
     font-size: 13px;
     margin-bottom: 10px;
+
 }
