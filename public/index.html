@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food</title>
+</head>
+<body>
+    <h1>Food</h1>
+
+    <h2>Add Food</h2>
+    <form id="foodForm">
+        <label>What did you eat?</label><br>
+        <input type="text" id="food" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Food History</h2>
+    <button id="loadData">Load Food</button>
+    <div id="foodList"></div>
+
+    <script>
+        document.getElementById('foodForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const food = document.getElementById('food').value;
+
+            const response = await fetch('/new-data', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({food: food})
+            });
+
+            const result = await response.json();
+            alert('Food saved');
+            document.getElementById('food').value = '';
+        });
+        document.getElementById('loadData').addEventListener('click', async () => {
+            const response = await fetch('/data');
+            const foods = await response.json();
+
+            const foodList = document.getElementById('foodList');
+            foodList.innerHTML = '';
+
+            foods.forEach(f => {
+                const p = document.createElement('p');
+                p.textContent = f.food + ' - ' + new Date(f.timestamp).toLocaleString();
+                foodList.appendChild(p);
+            });
+        });
+    </script>
+</body>
+</html>
+
