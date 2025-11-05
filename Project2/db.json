@@ -1,0 +1,47 @@
+{
+  "combos": [
+    {
+      "nickname": "Anonymous Chef",
+      "ingredients": [
+        "Beef",
+        "Broccoli"
+      ],
+      "dishName": "Beef with Broccoli",
+      "dishImage": "menu/Beef with Broccoli.png",
+      "calories": 226,
+      "timestamp": "2025-11-05T03:22:05.065Z"
+    },
+    {
+      "nickname": "Alex",
+      "ingredients": [
+        "Beef",
+        "Broccoli"
+      ],
+      "dishName": "Beef with Broccoli",
+      "dishImage": "menu/Beef with Broccoli.png",
+      "calories": 226,
+      "timestamp": "2025-11-05T03:25:34.421Z"
+    },
+    {
+      "nickname": "Jaylin",
+      "ingredients": [
+        "Broccoli"
+      ],
+      "dishName": "Stir broccoli",
+      "dishImage": "menu/Stir broccoli.png",
+      "calories": 231,
+      "timestamp": "2025-11-05T03:25:42.865Z"
+    },
+    {
+      "nickname": "Jaylin",
+      "ingredients": [
+        "Orange",
+        "Chicken breast"
+      ],
+      "dishName": "Orange chicken",
+      "dishImage": "menu/Orange chicken.png",
+      "calories": 841,
+      "timestamp": "2025-11-05T03:25:51.402Z"
+    }
+  ]
+}
