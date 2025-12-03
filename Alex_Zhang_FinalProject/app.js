@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { writeFile } from "fs/promises";
 import express from 'express';
 import Replicate from 'replicate';
 const app = express();
