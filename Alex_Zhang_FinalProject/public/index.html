@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Language in english, Alex Zhang Final project for connection lab, Dec 2025 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Project Name Iphone 17 Pro Max Case Generator-->
+  <title>Iphone 17 Pro Max Case Generator · Alex Zhang</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Link to our index.js file -->
+  <script src="index.js" defer></script>
+  <!-- Socket.IO client library for real-time communication -->
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <!-- The main container -->
+  <div class="container">
+    <h1 class="page-title">Iphone 17 Pro Max Case Generator</h1>
+    <!-- Input box and button-->
+    <div class="input-section">
+      <div class="input-group">
+        <input type="text" id="promptInput" class="prompt-input" placeholder="Enter prompt, e.g. rainbow pattern, abstract art, etc.">
+        <button id="generateBtn" class="btn">Start</button>
+      </div>
+      <!-- Color picker to choose phone case color -->
+      <div class="case-selector">
+        <label class="color-label">Choose phone case color:</label>
+        <div class="color-options">
+          <button class="color-btn active" data-case="Phonecase1.png" style="background-color: #D4E157;"></button>
+          <button class="color-btn" data-case="Phonecase2.png" style="background-color: #9B89B0;"></button>
+          <button class="color-btn" data-case="Phonecase3.png" style="background-color: #5A6F8E;"></button>
+          <button class="color-btn" data-case="Phonecase4.png" style="background-color: #D78163;"></button>
+          <button class="color-btn" data-case="Phonecase5.png" style="background-color: #A67C6D;"></button>
+          <button class="color-btn" data-case="Phonecase6.png" style="background-color: #7B7D7E;"></button>
+          <button class="color-btn" data-case="Phonecase7.png" style="background-color: #C4B5E3;"></button>
+          <button class="color-btn" data-case="Phonecase8.png" style="background-color: #657A90;"></button>
+        </div>
+
+      </div>
+      <!-- statusMessage of message Replicate API request  -->
+      <div id="statusMessage" class="status-message"></div>
+    </div>
+    <!-- Main content area with preview and history -->
+    <div class="content-area">
+      <!-- Preview of phone case  -->
+      <div class="preview-section">
+        <div class="phone-preview">
+          <!-- When there are no picture, show no design -->
+          <div class="empty-state" id="emptyState">No design</div>
+          <!-- The phone case image and texture layer -->
+          <img class="texture-layer" id="textureImg" src="">
+          <!-- The phone case image -->
+          <img class="case-layer" id="caseImg" src="Phonecase1.png">
+        </div>
+      </div>
+
+      <!-- History list section -->
+      <div class="history-section">
+        <div class="history-header">
+          <h2 class="history-title">Design History</h2>
+          <button id="downloadBtn" class="download-btn" disabled>Download</button>
+        </div>
+        <!-- The list of all previous designs -->
+        <div id="historyList" class="history-list">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
