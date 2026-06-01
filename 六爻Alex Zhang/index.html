@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>六爻铜钱互动游戏</title>
+
+  <style>
+    :root {
+      --bg: #f5ead6;
+      --paper: #fff8ea;
+      --paper-dark: #efe0c2;
+      --ink: #3b2612;
+      --muted: #8a6d45;
+      --red: #8a2f23;
+      --gold: #c58a35;
+      --brown: #5a3e1b;
+      --brown-dark: #3d2a10;
+      --shadow: rgba(70, 43, 16, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(197, 138, 53, 0.18), transparent 32%),
+        radial-gradient(circle at 90% 20%, rgba(138, 47, 35, 0.12), transparent 30%),
+        linear-gradient(180deg, #f8f1e3 0%, #efe0c2 100%);
+      display: flex;
+      justify-content: center;
+      padding: 28px 18px 48px;
+    }
+
+    .page {
+      width: min(1080px, 100%);
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .seal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border: 2px solid var(--red);
+      color: var(--red);
+      font-size: 14px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      transform: rotate(-3deg);
+      background: rgba(255, 248, 234, 0.7);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 10px auto 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    .main-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 250, 239, 0.94), rgba(242, 226, 195, 0.94));
+      box-shadow:
+        0 24px 60px var(--shadow),
+        inset 0 0 0 1px rgba(90, 62, 27, 0.18);
+      overflow: hidden;
+    }
+
+    .main-card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(90, 62, 27, 0.18);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .main-card::after {
+      content: "☰  ☷  ☳  ☵  ☲  ☱  ☶  ☴";
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 12px;
+      text-align: center;
+      color: rgba(90, 62, 27, 0.18);
+      font-size: 18px;
+      letter-spacing: 0.7em;
+      pointer-events: none;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(197, 138, 53, 0.08));
+    }
+
+    canvas {
+      display: block;
+      max-width: 100%;
+      height: auto !important;
+      border-radius: 18px;
+      box-shadow:
+        0 12px 30px rgba(59, 38, 18, 0.16),
+        inset 0 0 0 1px rgba(90, 62, 27, 0.12);
+    }
+
+    #ai-section {
+      position: relative;
+      z-index: 2;
+      margin-top: 24px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 248, 234, 0.78);
+      border: 1px solid rgba(90, 62, 27, 0.18);
+      box-shadow: 0 16px 40px rgba(70, 43, 16, 0.12);
+      backdrop-filter: blur(8px);
+      text-align: center;
+    }
+
+    .ai-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    .ai-desc {
+      margin: 0 auto 18px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    #ask-btn {
+      display: none;
+      padding: 13px 38px;
+      font-size: 17px;
+      font-family: inherit;
+      background: linear-gradient(180deg, #76501f, var(--brown));
+      color: #fff8ea;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      cursor: pointer;
+      margin-bottom: 18px;
+      box-shadow:
+        0 10px 22px rgba(90, 62, 27, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    #ask-btn:hover {
+      background: linear-gradient(180deg, #6c481c, var(--brown-dark));
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(90, 62, 27, 0.32);
+    }
+
+    #ask-btn:disabled {
+      background: #aaa;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
+    #ai-result {
+      display: none;
+      color: var(--brown);
+      font-size: 14px;
+      margin: 8px 0 14px;
+    }
+
+    .loading-dots::after {
+      content: "";
+      animation: dots 1.2s infinite;
+    }
+
+    @keyframes dots {
+      0% { content: ""; }
+      33% { content: "."; }
+      66% { content: ".."; }
+      100% { content: "..."; }
+    }
+
+    #ai-image {
+      display: none;
+      width: min(900px, 100%);
+      margin: 6px auto 0;
+      border-radius: 18px;
+      box-shadow: 0 18px 46px rgba(59, 38, 18, 0.22);
+      border: 1px solid rgba(90, 62, 27, 0.18);
+    }
+
+    #download-btn {
+      display: none;
+      margin: 14px auto 0;
+      padding: 10px 30px;
+      font-size: 15px;
+      font-family: inherit;
+      background: linear-gradient(180deg, #2a6b3a, #1e4f2b);
+      color: #f0faf3;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow:
+        0 8px 18px rgba(30, 79, 43, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    #download-btn:hover {
+      background: linear-gradient(180deg, #235c31, #163d21);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(30, 79, 43, 0.34);
+    }
+
+    #download-btn:disabled {
+      background: #aaa;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .note {
+      margin-top: 16px;
+      color: rgba(90, 62, 27, 0.72);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 18px 10px 36px;
+      }
+
+      .main-card {
+        padding: 12px;
+        border-radius: 20px;
+      }
+
+      .canvas-wrap {
+        padding: 6px;
+      }
+
+      #ai-section {
+        padding: 18px;
+      }
+
+      .main-card::after {
+        letter-spacing: 0.25em;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="seal">六爻<br />铜钱</div>
+      <h1>Six-Line Coin Divination</h1>
+      <p class="subtitle">
+        Toss three ancient coins six times. The ritual slowly forms a hexagram from bottom to top.
+      </p>
+    </header>
+
+    <section class="main-card">
+      <div class="canvas-wrap">
+        <!-- p5.js canvas will appear here automatically -->
+      </div>
+
+      <section id="ai-section">
+        <div class="ai-title">AI Hexagram Image</div>
+        <p class="ai-desc">
+          Complete six tosses first. After the hexagram appears, you can generate a visual interpretation of the result.
+        </p>
+
+        <button id="ask-btn" onclick="askAI()">AI generate Hexagram Image</button>
+        <div id="ai-result"></div>
+        <img id="ai-image" alt="卦象图" />
+        <button id="download-btn" onclick="downloadImage()">downloadImage</button>
+      </section>
+    </section>
+
+    <div class="note">
+      Tip: Press <strong>R</strong> to reset the divination.
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.2/p5.min.js"></script>
+  <script src="p5.js"></script>
+
+  <script>
+    function onHexagramComplete() {
+      const btn = document.getElementById("ask-btn");
+      const msg = document.getElementById("ai-result");
+      const img = document.getElementById("ai-image");
+      const dlBtn = document.getElementById("download-btn");
+
+      btn.style.display = "inline-block";
+      msg.style.display = "none";
+      msg.className = "";
+      img.style.display = "none";
+      dlBtn.style.display = "none";
+    }
+
+    function onHexagramReset() {
+      const btn = document.getElementById("ask-btn");
+      const msg = document.getElementById("ai-result");
+      const img = document.getElementById("ai-image");
+      const dlBtn = document.getElementById("download-btn");
+
+      btn.style.display = "none";
+      msg.style.display = "none";
+      msg.className = "";
+      img.style.display = "none";
+      dlBtn.style.display = "none";
+    }
+
+    async function askAI() {
+      const btn = document.getElementById("ask-btn");
+      const msg = document.getElementById("ai-result");
+      const img = document.getElementById("ai-image");
+      const dlBtn = document.getElementById("download-btn");
+
+      btn.disabled = true;
+      btn.textContent = "generating";
+      msg.style.display = "block";
+      msg.className = "loading-dots";
+      msg.textContent = "generating Hexagram,plz wait";
+      img.style.display = "none";
+      dlBtn.style.display = "none";
+
+      try {
+        const res = await fetch("/interpret", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(window._hexagramData)
+        });
+
+        const json = await res.json();
+
+        if (json.imageUrl) {
+          img.src = json.imageUrl;
+          img.style.display = "block";
+          dlBtn.style.display = "inline-block";
+          msg.style.display = "none";
+          msg.className = "";
+        } else {
+          msg.className = "";
+          msg.textContent = "生成失败：" + (json.error || "未知错误");
+        }
+      } catch (e) {
+        msg.className = "";
+        msg.textContent = "请求失败：" + e.message;
+      }
+
+      btn.disabled = false;
+      btn.textContent = "Regenerate";
+    }
+
+    async function downloadImage() {
+      const img = document.getElementById("ai-image");
+      const dlBtn = document.getElementById("download-btn");
+      if (!img.src) return;
+
+      dlBtn.disabled = true;
+      dlBtn.textContent = "downloading…";
+
+      try {
+        const proxyUrl = "/download?url=" + encodeURIComponent(img.src);
+        const res = await fetch(proxyUrl);
+        if (!res.ok) throw new Error("服务器返回 " + res.status);
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "卦象图_" + Date.now() + ".png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        alert("download fail：" + e.message);
+      }
+
+      dlBtn.disabled = false;
+      dlBtn.textContent = "downloadImage";
+    }
+  </script>
+</body>
+</html>
